@@ -6,6 +6,7 @@
     <title>SIMPADU POLIBAN</title>
 </head>
 <body>
-    <hi>DATA MAHASISWA<hi>
+    <h1>DATA MAHASISWA<h1>
+        
 </body>
 </html>
