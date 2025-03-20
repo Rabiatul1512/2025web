@@ -1,3 +1,31 @@
+<?php
+include "koneksi.php";
+
+$query = "SELECT * FROM mahasiswa";
+$data = ambildata($query);
+
+?>
+
+<?php
+$servername = "localhost";
+$database = "2025web";
+$username = "root";
+$password = "";
+
+$conn = mysqli_connect($servername, $username, $password, $database);
+
+$query = "SELECT * FROM mahasiswa";
+$hasil = mysqli_query($conn, $query);
+
+$data = [];
+while ($baris = mysqli_fetch_assoc($hasil)) {
+    $data[] = $baris;
+}
+
+var_dump($data);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,18 +41,21 @@
             <th>No</th>
             <th>Nim</th>
             <th>Nama</th>
+            <th>telepon</th>
+            <th>tanggal_lahir</th>
         <thead>
         </tbody>
+        <?php
+        $i = 1;
+        foreach ($data as $d) : ?>
             <tr>
-                <td>1</td>
-                <td>E020323016</td>
-                <td>Rabiatul</td>
+                <td><?php echo $i++; ?></td>
+                <td><?php echo $d["nim"] ?></td>
+                <td><?php echo $d["nama"]?></td>
+                <td><?php echo $d["telepon"]?></td>
+                <td><?php echo $d["tanggal_lahir"]?></td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>E020323052</td>
-                <td>Bibil</td>
-            </tr>
+        <?php endforeach; ?>
         </tbody>
     <table>   
 </body>
