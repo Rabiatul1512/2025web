@@ -1,28 +1,8 @@
 <?php
 include "koneksi.php";
 
-$query = "SELECT * FROM mahasiswa";
+$query = "SELECT m.*, p.nama nama_prodi FROM mahasiswa m JOIN prodi p ON m.id = p.id;";
 $data = ambildata($query);
-
-?>
-
-<?php
-$servername = "localhost";
-$database = "2025web";
-$username = "root";
-$password = "";
-
-$conn = mysqli_connect($servername, $username, $password, $database);
-
-$query = "SELECT * FROM mahasiswa";
-$hasil = mysqli_query($conn, $query);
-
-$data = [];
-while ($baris = mysqli_fetch_assoc($hasil)) {
-    $data[] = $baris;
-}
-
-var_dump($data);
 
 ?>
 
@@ -34,29 +14,38 @@ var_dump($data);
     <title>SIMPADU POLIBAN</title>
 </head>
 <body>
-    <h1>DATA MAHASISWA<h1>
+    <h1>DATA MAHASISWA</h1>
     <br>
-    <table border="1">
+    <a href="tambahmahasiswa.php">Tambah</a>
+    <table border="1" cellspacing="0" cellpadding="5">
         <thead>
             <th>No</th>
             <th>Nim</th>
             <th>Nama</th>
-            <th>telepon</th>
-            <th>tanggal_lahir</th>
-        <thead>
-        </tbody>
+            <th>Tanggal Lahir</th>
+            <th>Telepon</th>
+            <th>Email</th>
+            <th>Prodi</th>
+            <th>Aksi</th>
+        </thead>
+        <tbody>
+
         <?php
         $i = 1;
         foreach ($data as $d) : ?>
             <tr>
                 <td><?php echo $i++; ?></td>
                 <td><?php echo $d["nim"] ?></td>
-                <td><?php echo $d["nama"]?></td>
-                <td><?php echo $d["telepon"]?></td>
-                <td><?php echo $d["tanggal_lahir"]?></td>
+                <td><?php echo $d["nama"] ?></td>
+                <td><?php echo $d["tanggal_lahir"] ?></td>
+                <td><?php echo $d["telepon"] ?></td>
+                <td><?php echo $d["email"] ?></td>
+                <td><?php echo $d["nama_prodi"] ?></td>
+                <td><a href="deletemahasiswa.php?nim=<?= $d['nim']; ?>" onclick="return confirm('Yakin ingin hapus')">Delete</a> | <a href="editmahasiswa.php?nim=<?= $d['nim']; ?>">Edit</a></td>
             </tr>
         <?php endforeach; ?>
+
         </tbody>
-    <table>   
+    </table>
 </body>
 </html>
