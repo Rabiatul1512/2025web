@@ -1,5 +1,8 @@
 <?php
-
+session_start();
+if (!isset($_SESSION['login'])) {
+    header("location: login.html");
+}
 include "koneksi.php";
 
 $query = "SELECT * FROM prodi";
@@ -46,7 +49,7 @@ include "template/sidebar.php";
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table class="table table-bordered">
-                                <thead> 
+                                <thead>
                                     <th>No</th>
                                     <th>Nama</th>
                                     <th>Kaprodi</th>
@@ -62,7 +65,6 @@ include "template/sidebar.php";
                                             <td><?php echo $d["nama"] ?></td>
                                             <td><?php echo $d["kaprodi"] ?></td>
                                             <td><?php echo $d["jurusan"] ?></td>
-                                            <td><a href="deleteprodi.php?nim=<?= $d['nim']; ?>" onclick="return confirm('Yakin ingin hapus')" class="btn btn-danger">Delete</a> <a href="editprodi.php?nim=<?= $d['nim']; ?>" class="btn btn-primary">Edit</a></td>
                                         </tr>
                                     <?php endforeach; ?>
 
